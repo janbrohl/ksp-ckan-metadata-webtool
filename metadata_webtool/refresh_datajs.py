@@ -174,7 +174,7 @@ def main():
         "https://raw.githubusercontent.com/KSP-CKAN/CKAN/master/CKAN.schema").json()
     now = datetime.datetime.utcnow()
     now_str = now.strftime("%Y-%m-%dT%H:%M:%S")
-    with codecs.open("static/data.js", "w", encoding="utf-8") as f:
+    with codecs.open("static/metadata-webtool/data.js", "w", encoding="utf-8") as f:
         f.write("// auto-generated on %s UTC - see refresh_datajs.py\n\"use strict\";\n\nvar data_updated = \"%s\";\n\n" % (now_str, now_str))
 
         f.write("var mandatory_fields = ")

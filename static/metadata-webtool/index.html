@@ -1,14 +1,15 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <title>Metadata-Webtool</title>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css" integrity="sha384-mf72GmkUsTKkmt05bABaLGVDDWha9SeDJTZ0tTQv4t1Tgz3CRQX+PENxJR8nQ7Tk" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha384-TlQc6091kl7Au04dPgLW7WK3iey+qO8dAi/LdwxaGBbszLxnizZ4xjPyNrEf+aQt" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" integrity="sha384-YwCdhNQ2IwiYajqT/nGCj0FiU5SR4oIkzYP3ffzNWtu39GKBddP0M0waDU7Zwco0" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tv4/1.2.7/tv4.js" integrity="sha384-BLm4KsxYkSCYQ0dAKxVu8c8GMAwhg4FR+vovFz8X9uETUfb1bn3F96Ebm74NAcYc" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.0.0/jszip.js" integrity="sha384-JoB0oWpuxbS3K5bzPuKlceF17bqFYnvaq6rt3BOiTYox+9dmwWZ8jPJrxNXo7SL/" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/bower_components/jquery-ui/themes/base/jquery-ui.min.css">
+    <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/static/bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/static/bower_components/tv4/tv4.js"></script>
+    <script src="/static/bower_components/jszip/dist/jszip.min.js"></script>
     <script src="data.js"></script>
     <style>
         .ui-autocomplete {
@@ -17,15 +18,15 @@
             /* prevent horizontal scrollbar */
             overflow-x: hidden;
         }
-
+        
         code {
             background-color: lightgray;
         }
-
+        
         .filled-by-netkan {
             background-color: lightgreen;
         }
-
+        
         #json_output {
             border-style: solid;
             border-width: thin;
@@ -33,6 +34,7 @@
     </style>
     <script src="script.js"></script>
 </head>
+
 <body>
     <div id="mode_tabs">
         <ul>
@@ -63,7 +65,7 @@
                     <label>Repository name<br /><input type="text" id="github_repo" required="required" size="40" /></label>
                 </li>
                 <li>
-                    <label>Fiter Regular Expression<br /><input type="text" id="github_filter_regexp" size="40" /></label> Case-sensitive C# semantics
+                    <label>Fiter Regular Expression<br /><input type="text" id="github_filter_regexp" size="40" /></label>                    Case-sensitive C# semantics
                     <br />
                     <small>
                         By default NetKAN will look for a zip file in the release.
@@ -117,17 +119,17 @@
         </div>
     </div>
     <p>
-        Fields filled by the NetKAN indexer look like <input type="text" class="filled-by-netkan" disabled="disabled" /> - you can override auto-detection by setting a value yourself. <strong>If unsure - don't override.</strong>
+        Fields filled by the NetKAN indexer look like <input type="text" class="filled-by-netkan" disabled="disabled" />        - you can override auto-detection by setting a value yourself. <strong>If unsure - don't override.</strong>
     </p>
     <div id="accordion">
         <h3>Mandatory</h3>
         <div>
             <ol id="mandatory_fields">
                 <li>
-                    <label>Identifier - Machine-friendly name for the mod (only numbers, letters, and dashes, no spaces)<br /><input type="text" id="identifier" placeholder="AwesomeMod" size="40" pattern="^[A-Za-z][A-Za-z0-9-]*$" /></label> <strong id="identifier_info"></strong>
+                    <label>Identifier - Machine-friendly name for the mod (only numbers, letters, and dashes, no spaces)<br /><input type="text" id="identifier" placeholder="AwesomeMod" size="40" pattern="^[A-Za-z][A-Za-z0-9-]*$" /></label>                    <strong id="identifier_info"></strong>
                 </li>
                 <li>
-                    <label>Name - User-friendly name for the mod<br /><input type="text" id="name" placeholder="Awesome Mod" size="40" /></label> <strong id="name_info"></strong>
+                    <label>Name - User-friendly name for the mod<br /><input type="text" id="name" placeholder="Awesome Mod" size="40" /></label>                    <strong id="name_info"></strong>
                 </li>
                 <li>
                     <label><input type="checkbox" id="add_vref" value="1" onchange="switch_add_vref()" /> Installs <code>.version</code> file</label>
@@ -160,38 +162,52 @@
                     </div>
                 </li>
                 <li>
-                    <label>KSP-Version<br /><input type="text" id="ksp_version" size="40" /></label> examples: <code>==1.0</code> or <code>&lt;=1.1&gt;=1.0.3</code> - set to <code>any</code> (or leave empty) to state compatibility with <em>all</em> versions
+                    <label>KSP-Version<br /><input type="text" id="ksp_version" size="40" /></label> examples: <code>==1.0</code>                    or <code>&lt;=1.1&gt;=1.0.3</code> - set to <code>any</code> (or leave empty) to state compatibility
+                    with <em>all</em> versions
                     <br />
                     <small>While not technically mandatory, not providing this field is considered bad practice.</small>
                 </li>
             </ol>
         </div>
-        <h3>Resources (Suggested)</h3>
-        <div id="resources_fields">
+        <h3>Suggested</h3>
+        <div>
             <ol>
                 <li>
-                    <label>Homepage<br /><input type="url" id="resources_homepage" size="40" /></label> URI to the preferred landing page for the mod
+                    <label>Description - A lond description of what the mod does<br /><textarea id="description" placeholder="Awesome mod makes everything better by adding Unicorns!" cols="40"></textarea></label>
+                </li>
+            </ol>
+            <h4>Resources</h4>
+            <ol id="resources_fields">
+                <li>
+                    <label>Homepage<br /><input type="url" id="resources_homepage" size="40" /></label> URI to the preferred
+                    landing page for the mod
                 </li>
                 <li>
-                    <label>Repository<br /><input type="url" id="resources_repository" size="40" /></label> URI to the repository where the mod's source can be found
+                    <label>Repository<br /><input type="url" id="resources_repository" size="40" /></label> URI to the repository
+                    where the mod's source can be found
                 </li>
                 <li>
-                    <label>CI<br /><input type="url" id="resources_ci" size="40" /></label> Continuous Integration (e.g. Jenkins) Server where the module is being built
+                    <label>CI<br /><input type="url" id="resources_ci" size="40" /></label> Continuous Integration (e.g.
+                    Jenkins) Server where the module is being built
                 </li>
                 <li>
-                    <label>SpaceDock<br /><input type="url" id="resources_spacedock" size="40" /></label> URI to the mod's SpaceDock page
+                    <label>SpaceDock<br /><input type="url" id="resources_spacedock" size="40" /></label> URI to the mod's
+                    SpaceDock page
                 </li>
                 <li>
-                    <label>Manual<br /><input type="url" id="resources_manual" size="40" /></label> URI to the mod's user manual if it exists
+                    <label>Manual<br /><input type="url" id="resources_manual" size="40" /></label> URI to the mod's user
+                    manual if it exists
                 </li>
                 <li>
                     <label>License<br /><input type="url" id="resources_license" size="40" /></label> URI to the mod's license
                 </li>
                 <li>
-                    <label>Bugtracker<br /><input type="url" id="resources_bugtracker" size="40" /></label> URI to the mod's bugtracker if it exists (Preferred page to post problems/questions)
+                    <label>Bugtracker<br /><input type="url" id="resources_bugtracker" size="40" /></label> URI to the mod's
+                    bugtracker if it exists (Preferred page to post problems/questions)
                 </li>
                 <li>
-                    <label>Screenshot<br /><input type="url" id="resources_x_screenshot" size="40" /></label> A direct URL to a screenshot of the mod
+                    <label>Screenshot<br /><input type="url" id="resources_x_screenshot" size="40" /></label> A direct URL
+                    to a screenshot of the mod
                 </li>
             </ol>
         </div>
@@ -202,8 +218,8 @@
                 <strong>Do not use install instructions to install multiple mods.</strong>
             </p>
             <p>
-                Selecting the .zip file on your computer will enable automatic path completion.<br />
-                No data will be uploaded anywhere.<br />
+                Selecting the .zip file on your computer will enable automatic path completion.<br /> No data will be uploaded
+                anywhere.<br />
                 <input type="file" id="archive_upload" /><br />
                 <datalist id="archive_paths"></datalist>
             </p>
@@ -232,7 +248,7 @@
         <h3>Relationships</h3>
         <div id="references_fields">
             <p>
-                You can add version restrictions. For example <code>SomeModID</code> can be restricted like <code>SomeModID ==1.0</code> or <code>SomeModID &lt;=1.1 &gt;=1.0.3</code>
+                You can add version restrictions. For example <code>SomeModID</code> can be restricted like <code>SomeModID ==1.0</code>                or <code>SomeModID &lt;=1.1 &gt;=1.0.3</code>
             </p>
             <ol>
                 <li>
@@ -323,7 +339,7 @@
                     </div>
                 </li>
                 <li>
-                    <label><input type="checkbox" id="add_ksp_version_strict" value="1" size="40" checked="checked" /> Install only on exact KSP-Version match</label> in case this mods is not compatible with small KSP patches/hotfixes
+                    <label><input type="checkbox" id="add_ksp_version_strict" value="1" size="40" checked="checked" /> Install only on exact KSP-Version match</label>                    in case this mods is not compatible with small KSP patches/hotfixes
                 </li>
 
             </ol>
@@ -358,4 +374,5 @@
         Copyright (c) 2016, See <a href="https://github.com/KSP-CKAN/metadata-webtool/blob/master/LICENSE.md">LICENSE</a>
     </small>
 </body>
+
 </html>
