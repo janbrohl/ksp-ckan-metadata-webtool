@@ -21,6 +21,6 @@ Yes, you can try a possibly outdated and maybe even broken version at https://ks
 
 ##Can I also run the current version at my Computer?
 
-Yes, just open static/index.html
+Yes, just open static/metadata-webtool/index.html
 
 The Python stuff (*.py) is not yet needed for trying it out but for updating data only - just run refresh_datajs.py if you want to do that.

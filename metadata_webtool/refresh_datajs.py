@@ -1,11 +1,14 @@
-#! /usr/bin/env python3
+#! /usr/bin/env python2
 
 # Copyright (c) 2016, Jan Brohl <janbrohl@t-online.de>
 # All rights reserved.
 
+from __future__ import unicode_literals, absolute_import
+
 import json
-import interfaces.ckan
 import datetime
+import requests
+import codecs
 
 license_id_to_name = {
     "Apache": "Apache License",
@@ -163,34 +166,35 @@ ckan_names.sort();
 
 
 def main():
-    ckan = interfaces.ckan.full()
-    ckan_ids = sorted(set(e["identifier"] for e in ckan))
+    ckan = requests.get(
+        "https://brohlsoft.de/apps/ckan/latest/ckan.json").json()
     ckan_names_ids = sorted(
         set((e["name"].strip(), e["identifier"]) for e in ckan))
-    ckan_schema = interfaces.ckan.json_schema()
+    ckan_schema = requests.get(
+        "https://raw.githubusercontent.com/KSP-CKAN/CKAN/master/CKAN.schema").json()
     now = datetime.datetime.utcnow()
     now_str = now.strftime("%Y-%m-%dT%H:%M:%S")
-    with open("static/data.js", "w", encoding="utf-8") as f:
+    with codecs.open("static/data.js", "w", encoding="utf-8") as f:
         f.write("// auto-generated on %s UTC - see refresh_datajs.py\n\"use strict\";\n\nvar data_updated = \"%s\";\n\n" % (now_str, now_str))
 
         f.write("var mandatory_fields = ")
-        json.dump(mandatory_fields, f, sort_keys=True)
+        json.dump(mandatory_fields, f, sort_keys=True, ensure_ascii=False)
         f.write(";\n\n")
 
         f.write("var license_id_to_name = ")
-        json.dump(license_id_to_name, f, sort_keys=True)
+        json.dump(license_id_to_name, f, sort_keys=True, ensure_ascii=False)
         f.write(";\n\n")
 
         f.write("var modes_autofill = ")
-        json.dump(modes_autofill, f, sort_keys=True)
+        json.dump(modes_autofill, f, sort_keys=True, ensure_ascii=False)
         f.write(";\n\n")
 
         f.write("var ckan_schema = ")
-        json.dump(ckan_schema, f, sort_keys=True)
+        json.dump(ckan_schema, f, sort_keys=True, ensure_ascii=False)
         f.write(";\n\n")
 
         f.write("var ckan_names_ids = ")
-        json.dump(ckan_names_ids, f, sort_keys=True)
+        json.dump(ckan_names_ids, f, sort_keys=True, ensure_ascii=False)
         f.write(";\n\n")
 
         f.write(js)
