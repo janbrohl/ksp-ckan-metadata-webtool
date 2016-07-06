@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2016 Jan Brohl and others - see https://github.com/janbrohl/ksp-ckan-metadata-webtool/graphs/contributors
+Copyright (c) 2016 Jan Brohl and Matthew Heguy - see https://github.com/janbrohl/ksp-ckan-metadata-webtool/graphs/contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
