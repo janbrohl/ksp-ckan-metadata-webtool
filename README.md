@@ -16,11 +16,11 @@ Spacedock, github, and all other hosts (curse will be a kref-able source in the 
 
 ##Can I Try?
 
-Yes, you can try a possibly outdated and maybe even broken version at https://ksp-ckan.github.io/metadata-webtool/
+Yes, you can try a possibly outdated and maybe even broken version at https://brohlsoft.de/apps/metadata-webtool/
 
 
 ##Can I also run the current version at my Computer?
 
-Yes, just open static/metadata-webtool/index.html
+Yes
+Install web-dependencies with bower, install python dependencies with `pip install -r requirements.txt` (in a virtual environment), start main.py and open http://localhost:8080/metadata-webtool/
 
-The Python stuff (*.py) is not yet needed for trying it out but for updating data only - just run refresh_datajs.py if you want to do that.
