@@ -279,7 +279,9 @@ function generate_netkan() {
         */
         install.push(d);
     });
-    o["install"] = install;
+    if (install.length){
+        o["install"] = install;
+    }
 
     var ksp_ver_raw = get_val("ksp_version");
     var ksp_ver = parse_ref_line("ksp" + ksp_ver_raw);
